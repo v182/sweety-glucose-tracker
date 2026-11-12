@@ -1,0 +1,12 @@
+node_modules/
+.env
+.env.*
+!.env.example
+client/dist/
+.preview-data/
+coverage/
+*.log
+*.tgz
+*.zip
+.DS_Store
+.openai/
