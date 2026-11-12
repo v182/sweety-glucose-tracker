@@ -18,7 +18,8 @@
     "test": "npm run test:server && npm run test:client",
     "test:server": "node --env-file-if-exists=.env --test --test-concurrency=1 server/test/*.test.js",
     "test:client": "vitest run --config client/vite.config.js",
-    "check": "npm test && npm run build"
+    "check": "npm test && npm run build",
+    "smoke": "node --env-file-if-exists=.env scripts/smoke.mjs"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
