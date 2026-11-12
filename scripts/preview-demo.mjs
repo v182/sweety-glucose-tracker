@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url';
 import { createEmbeddedDb } from './embedded-db.mjs';
 import { loadConfig } from '../server/src/config.js';
 import { migrate } from '../server/src/db/migrate.js';
@@ -7,7 +8,7 @@ import { startServer } from '../server/src/index.js';
 if (process.env.NODE_ENV === 'production')
   throw new Error('The embedded demo is for local development only. Use PostgreSQL in production.');
 const config = loadConfig();
-const db = await createEmbeddedDb(new URL('../.preview-data', import.meta.url).pathname);
+const db = await createEmbeddedDb(fileURLToPath(new URL('../.preview-data', import.meta.url)));
 await migrate(db);
 await seed(db, {
   email: 'demo@sweety.local',

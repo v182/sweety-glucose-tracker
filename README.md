@@ -14,7 +14,7 @@ A responsive blood glucose journal for the Kenpath **Junior Full Stack Developer
 
 ## Requirements
 
-Node.js **22.12+**, npm and PostgreSQL **16+**, or Docker with Compose v2. The frontend and API share one origin; no separate client server or CORS configuration is needed.
+Node.js **22.22.2+ (22.x)** or **24.15.0+ (24.x)** or **26+**, npm and PostgreSQL **16+**, or Docker with Compose v2. The frontend and API share one origin; no separate client server or CORS configuration is needed.
 
 ## Option A: run everything with Docker
 

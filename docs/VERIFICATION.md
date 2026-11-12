@@ -43,3 +43,7 @@ Docker execution, GitHub Actions success and authenticated browser interaction a
 - [Registration field validation](screenshots/registration-validation.jpg)
 
 These are actual captures of the running app. They do not demonstrate the authenticated reading and report flows. A full capture walkthrough is provided in [DEMO.md](DEMO.md).
+
+## Windows demo path correction
+
+The demo now converts its file URL with Node’s `fileURLToPath` instead of reading `.pathname`, preventing a duplicated drive prefix on Windows and decoding spaces correctly. Windows-style URL conversion and script syntax were checked on Linux; native Windows execution remains to be confirmed on the candidate’s machine. Node engine requirements now match the installed jsdom test dependency.
