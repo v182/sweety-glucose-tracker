@@ -3,30 +3,35 @@
 Source: Kenpath's Junior Full Stack Developer assignment supplied by the candidate.
 
 ## Required
-- [ ] React frontend, Node.js / Express API, PostgreSQL database
-- [ ] Register with name, email, password; bcrypt hashing; login and logout
-- [ ] Authentication and ownership enforced on every reading/report endpoint
-- [ ] Create, view, edit, delete a reading: calendar date, one of four slots, mg/dl value
-- [ ] Required integer value, 40–600 inclusive; reject future dates
-- [ ] One reading per user/date/slot; at most four readings per user/date
-- [ ] Friendly field/server errors in the UI
-- [ ] Daily: selected date; include slot readings
-- [ ] Month-to-date: first of selected month through selected date
-- [ ] Monthly: entire month before the selected date's month
-- [ ] Highest, lowest, average rounded to one decimal, count; friendly empty states
-- [ ] README: install, database setup, server/client, tests, assumptions, improvements
-- [ ] .env.example with every environment variable and no real secrets
-- [ ] Repeatable seed script with synthetic demo data
-- [ ] Screenshots or a 2–3 minute screen recording
+
+- [x] React frontend, Node.js / Express API, PostgreSQL database implementation
+- [x] Register with name, email, password; bcrypt hashing; login and logout
+- [x] Authentication and ownership enforced on every reading/report endpoint
+- [x] Create, view, edit, delete a reading: calendar date, one of four slots, mg/dl value
+- [x] Required integer value, 40–600 inclusive; reject future dates
+- [x] One reading per user/date/slot; at most four readings per user/date
+- [x] Friendly field/server errors in the UI
+- [x] Daily: selected date; include slot readings
+- [x] Month-to-date: first of selected month through selected date
+- [x] Monthly: entire month before the selected date's month
+- [x] Highest, lowest, average rounded to one decimal, count; friendly empty states
+- [x] README: install, database setup, server/client, tests, assumptions, improvements
+- [x] .env.example with every environment variable and no real secrets
+- [x] Repeatable seed script with synthetic demo data
+- [ ] Screenshots or a 2–3 minute screen recording of the full authenticated workflow (login and validation screenshots included)
 - [ ] Public GitHub repository with real incremental commits
 
 ## Selected bonuses (after required features)
-- [ ] Paginated GET /readings
-- [ ] Monthly line chart
-- [ ] Docker Compose with PostgreSQL and the app
-- [ ] React Testing Library form tests
+
+- [x] Paginated GET /readings
+- [x] Monthly line chart
+- [x] Docker Compose with PostgreSQL and the app (configuration included; runtime verification pending)
+- [x] React Testing Library form tests
+
+Checked boxes mean implementation is present. See [VERIFICATION.md](VERIFICATION.md) for tests actually run and outstanding environment/browser checks.
 
 ## Decisions
+
 - Keep the required PostgreSQL stack; MongoDB is not needed.
 - A calendar date is stored as PostgreSQL DATE. APP_TIMEZONE defines today's date.
 - Default time zone: Asia/Kolkata. Document this shared-app assumption.
