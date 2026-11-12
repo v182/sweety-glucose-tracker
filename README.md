@@ -88,6 +88,14 @@ npm run check        # tests and build
 npm run format:check # formatting
 ```
 
+To check the running **built** application on a disposable local database, seed it first, set `DEMO_EMAIL` and `DEMO_PASSWORD` in `.env` to that seed account, then run:
+
+```bash
+npm run smoke
+```
+
+`SMOKE_BASE_URL` defaults to `http://localhost:3000`. The check verifies built assets, login/session restore, registration, CSRF protection, ownership, CRUD, all three reports, pagination and logout. It only accepts a localhost URL and leaves one synthetic test account; do not run it against a database containing real patient data. With Docker, the app must already be running and seeded; run this command from the host with Node.js installed.
+
 API tests use isolated in-memory PGlite by default. For a real PostgreSQL server set `TEST_DATABASE_URL` in `.env` to a separate database ending in `_test`:
 
 ```dotenv
@@ -96,7 +104,7 @@ TEST_DATABASE_URL=postgresql://sweety:choose-a-local-password@localhost:5432/swe
 
 For Compose, create this database with `docker compose exec db createdb -U sweety sweety_test` (adjust username if changed). Tests migrate it, create unique synthetic accounts and remove their own rows afterward. Never use a database containing real data.
 
-GitHub Actions is configured to run the same suite against **PostgreSQL 16**, then build the client after a push. Results and remaining checks are recorded in [docs/VERIFICATION.md](docs/VERIFICATION.md); unrun Docker/CI jobs are not claimed as passing.
+GitHub Actions is configured to run the same suite against **PostgreSQL 16** and build the client. A second job builds and starts Docker Compose, seeds its disposable database and runs the production HTTP smoke check. Results and remaining checks are recorded in [docs/VERIFICATION.md](docs/VERIFICATION.md); unrun Docker/CI jobs are not claimed as passing.
 
 Coverage includes bcrypt, revocation, user isolation, CSRF/origin checks, validation, concurrent duplicates, edits on full days, collision rollback, SQL constraints, pagination, leap-year/January boundaries, empty reports, seed repeatability, and form errors/editing/pending requests.
 
@@ -142,7 +150,7 @@ See [API reference](docs/API.md), [implementation walkthrough](docs/IMPLEMENTATI
 
 **With more time**
 
-- Verify Docker and PostgreSQL CI on the submission host; add browser end-to-end tests.
+- Complete the configured Docker CI run and authenticated browser checks; add automated browser end-to-end tests.
 - Add per-user time zones, email verification and password reset with expiring tokens.
 - Add export, audit history and a chart-adjacent accessible data table toggle.
 - Add scheduled expired-session cleanup and a shared rate-limit store for multiple processes.
