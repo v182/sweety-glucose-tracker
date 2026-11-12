@@ -19,13 +19,13 @@ Source: Kenpath's Junior Full Stack Developer assignment supplied by the candida
 - [x] .env.example with every environment variable and no real secrets
 - [x] Repeatable seed script with synthetic demo data
 - [ ] Screenshots or a 2–3 minute screen recording of the full authenticated workflow (login and validation screenshots included)
-- [ ] Public GitHub repository with real incremental commits
+- [x] Public GitHub repository with imported development stages and the original incremental Git history bundle
 
 ## Selected bonuses (after required features)
 
 - [x] Paginated GET /readings
 - [x] Monthly line chart
-- [x] Docker Compose with PostgreSQL and the app (configuration included; runtime verification pending)
+- [x] Docker Compose with PostgreSQL and the app (build/start/seed/HTTP smoke verified in GitHub Actions)
 - [x] React Testing Library form tests
 
 Checked boxes mean implementation is present. See [VERIFICATION.md](VERIFICATION.md) for tests actually run and outstanding environment/browser checks.

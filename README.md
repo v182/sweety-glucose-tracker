@@ -1,5 +1,7 @@
 # Sweety
 
+[Public repository](https://github.com/v182/sweety-glucose-tracker) · [Automated checks](https://github.com/v182/sweety-glucose-tracker/actions)
+
 A responsive blood glucose journal for the Kenpath **Junior Full Stack Developer – JavaScript & AI** assignment. React, Express and PostgreSQL power the application. Record up to four readings a day and review daily, month-to-date and previous-month reports.
 
 ## Features
@@ -104,7 +106,7 @@ TEST_DATABASE_URL=postgresql://sweety:choose-a-local-password@localhost:5432/swe
 
 For Compose, create this database with `docker compose exec db createdb -U sweety sweety_test` (adjust username if changed). Tests migrate it, create unique synthetic accounts and remove their own rows afterward. Never use a database containing real data.
 
-GitHub Actions is configured to run the same suite against **PostgreSQL 16** and build the client. A second job builds and starts Docker Compose, seeds its disposable database and runs the production HTTP smoke check. Results and remaining checks are recorded in [docs/VERIFICATION.md](docs/VERIFICATION.md); unrun Docker/CI jobs are not claimed as passing.
+GitHub Actions is configured to run the same suite against **PostgreSQL 16** and build the client. A second job builds and starts Docker Compose, seeds its disposable database and runs the production HTTP smoke check. Both jobs passed in [the verified CI run](https://github.com/v182/sweety-glucose-tracker/actions/runs/43267390444). Results and remaining browser checks are recorded in [docs/VERIFICATION.md](docs/VERIFICATION.md).
 
 Coverage includes bcrypt, revocation, user isolation, CSRF/origin checks, validation, concurrent duplicates, edits on full days, collision rollback, SQL constraints, pagination, leap-year/January boundaries, empty reports, seed repeatability, and form errors/editing/pending requests.
 
@@ -150,7 +152,7 @@ See [API reference](docs/API.md), [implementation walkthrough](docs/IMPLEMENTATI
 
 **With more time**
 
-- Complete the configured Docker CI run and authenticated browser checks; add automated browser end-to-end tests.
+- Complete authenticated and mobile browser checks; add automated browser end-to-end tests.
 - Add per-user time zones, email verification and password reset with expiring tokens.
 - Add export, audit history and a chart-adjacent accessible data table toggle.
 - Add scheduled expired-session cleanup and a shared rate-limit store for multiple processes.
@@ -159,3 +161,5 @@ See [API reference](docs/API.md), [implementation walkthrough](docs/IMPLEMENTATI
 **Development assistance**
 
 Developed with AI coding assistance. The candidate should run it locally, review the code and tests, and be ready to explain and modify the implementation in an interview. Commits record actual development stages and have not been backdated.
+
+GitHub publication imports the nine existing development snapshots through the GitHub integration. Import commits have new publication timestamps; original commit objects and dates are preserved in [the development history bundle](docs/sweety-history.bundle). See [history notes](docs/DEVELOPMENT-HISTORY.md).
