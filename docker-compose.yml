@@ -1,0 +1,46 @@
+services:
+  db:
+    image: postgres:16-bookworm
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-sweety}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: ${POSTGRES_DB:-sweety}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - sweety_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+  app:
+    build: .
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: postgresql://${POSTGRES_USER:-sweety}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-sweety}
+      APP_TIMEZONE: ${APP_TIMEZONE:-Asia/Kolkata}
+      APP_ORIGIN: ${APP_ORIGIN:-}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      TRUST_PROXY: ${TRUST_PROXY:-0}
+      SESSION_TTL_DAYS: ${SESSION_TTL_DAYS:-7}
+      BCRYPT_ROUNDS: ${BCRYPT_ROUNDS:-12}
+      DEMO_EMAIL: ${DEMO_EMAIL:-demo@sweety.local}
+      DEMO_PASSWORD: ${DEMO_PASSWORD:?Set DEMO_PASSWORD in .env}
+      DEMO_NAME: ${DEMO_NAME:-Alex Morgan}
+    ports:
+      - "127.0.0.1:${PORT:-3000}:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    command: ["sh", "-c", "npm run db:migrate && npm start"]
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      start_period: 20s
+      retries: 5
+
+volumes:
+  sweety_pgdata:

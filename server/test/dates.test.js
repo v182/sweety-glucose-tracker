@@ -5,7 +5,8 @@ import { readingErrors } from '../../shared/validation.js';
 
 test('calendar validation rejects impossible dates and accepts leap days', () => {
   assert.equal(isValidDate('2024-02-29'), true);
-  for (const date of ['2026-02-29', '2026-02-30', '2026-13-01', '2026-1-01', '0000-01-01', null]) assert.equal(isValidDate(date), false);
+  for (const date of ['2026-02-29', '2026-02-30', '2026-13-01', '2026-1-01', '0000-01-01', null])
+    assert.equal(isValidDate(date), false);
 });
 
 test('today is calculated in the configured zone across midnight', () => {
@@ -24,6 +25,11 @@ test('all three report ranges follow the selected date', () => {
 });
 
 test('value boundaries are inclusive, decimals and numeric strings are invalid', () => {
-  for (const value of [40, 600]) assert.deepEqual(readingErrors({ date: '2026-11-09', slot: 'fasting', value }, '2026-11-09'), {});
-  for (const value of [39, 601, 120.5, '120', NaN, Infinity, false]) assert.ok(readingErrors({ date: '2026-11-09', slot: 'fasting', value }, '2026-11-09').value);
+  for (const value of [40, 600])
+    assert.deepEqual(
+      readingErrors({ date: '2026-11-09', slot: 'fasting', value }, '2026-11-09'),
+      {},
+    );
+  for (const value of [39, 601, 120.5, '120', NaN, Infinity, false])
+    assert.ok(readingErrors({ date: '2026-11-09', slot: 'fasting', value }, '2026-11-09').value);
 });

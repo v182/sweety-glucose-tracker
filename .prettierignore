@@ -1,0 +1,6 @@
+node_modules
+client/dist
+package-lock.json
+.preview-data
+coverage
+*.bundle
